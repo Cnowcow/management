@@ -27,27 +27,30 @@ const useStyles = makeStyles(() => ({
     }
 }));
 
-
     /*
         1. constructor()
-
         2. componentWillMount()
-
         3. render()
-
         4. componentDidMount()
-
-
         props or state => shouldComponentUpdate()
     */
-
 
 function App() {
     const [customers, setCustomers] = useState([]);  // 상태 초기화
     const [completed, setCompleted] = useState(0);   // 프로그레스 바 상태
 
+    // 상태 초기화 함수
+    const stateRefresh = () => {
+        setCustomers([]);
+        setCompleted(0);
+        callApi()
+            .then(res => setCustomers(res))  // 고객 데이터를 상태에 저장
+            .catch(err => console.log(err));
+    };
+
+    // 프로그레스 바 상태 업데이트 함수
     const progress = () => {
-        setCompleted((prev) => (prev >= 100 ? 0 : prev + 1));
+        setCompleted(prev => (prev >= 100 ? 0 : prev + 1));
     };
 
     useEffect(() => {
@@ -100,7 +103,7 @@ function App() {
                     </TableBody>
                 </Table>
             </Paper>
-            <CustomerAdd/>
+            <CustomerAdd stateRefresh={stateRefresh}/>
         </ThemeProvider>
     );
 }
