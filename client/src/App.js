@@ -1,10 +1,11 @@
+import React, { useState, useEffect } from 'react';
+import Customer from "./components/Customer";
+import CustomerAdd from "./components/CustomerAdd";
 import { makeStyles } from '@mui/styles';  // @mui/styles로 수정
 import { createTheme, ThemeProvider } from '@mui/material/styles';  // @mui/material/styles는 ThemeProvider를 위해 유지
 import { Table, TableBody, TableHead, Paper } from "@mui/material";
 import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
-import Customer from "./components/Customer";
-import React, { useState, useEffect } from 'react';
 import {CircularProgress} from "@mui/material";
 
 // 테마 생성
@@ -99,6 +100,7 @@ function App() {
                     </TableBody>
                 </Table>
             </Paper>
+            <CustomerAdd/>
         </ThemeProvider>
     );
 }
