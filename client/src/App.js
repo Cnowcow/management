@@ -4,7 +4,7 @@ import { Table, TableBody, TableHead, Paper } from "@mui/material";
 import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
 import Customer from "./components/Customer";
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 // 테마 생성
 const theme = createTheme({
@@ -22,34 +22,21 @@ const useStyles = makeStyles(() => ({
     }
 }));
 
-const customers = [
-    {
-        'id': 1,
-        'image': 'http://hhjnn92.synology.me/marketFile/default2.jpg',
-        'name': '최현우',
-        'birthday': '920514',
-        'gender': '남자',
-        'job': '개발자'
-    },
-    {
-        'id': 2,
-        'image': 'http://hhjnn92.synology.me/marketFile/default2.jpg',
-        'name': '홍길동',
-        'birthday': '920000',
-        'gender': '남자',
-        'job': '개발자'
-    },
-    {
-        'id': 3,
-        'image': 'http://hhjnn92.synology.me/marketFile/default2.jpg',
-        'name': '임꺽정',
-        'birthday': '900000',
-        'gender': '남자',
-        'job': '개발자'
-    }
-];
-
 function App() {
+    const [customers, setCustomers] = useState([]);  // 상태 초기화
+
+    useEffect(() => {
+        callApi()
+            .then(res => setCustomers(res))  // 고객 데이터를 상태에 저장
+            .catch(err => console.log(err));
+    }, []);  // 컴포넌트가 마운트될 때만 호출
+
+    const callApi = async () => {
+        const response = await fetch('/api/customers'); // 절대 경로가 아닌 상대 경로로 변경
+        const body = await response.json();
+        return body;
+    }
+
     const classes = useStyles();
 
     return (
@@ -67,19 +54,17 @@ function App() {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {customers.map(c => {
-                            return (
-                                <Customer
-                                    key={c.id}
-                                    id={c.id}
-                                    image={c.image}
-                                    name={c.name}
-                                    birthday={c.birthday}
-                                    gender={c.gender}
-                                    job={c.job}
-                                />
-                            );
-                        })}
+                        {customers.length > 0 ? customers.map(c => (
+                            <Customer
+                                key={c.id}
+                                id={c.id}
+                                image={c.image}
+                                name={c.name}
+                                birthday={c.birthday}
+                                gender={c.gender}
+                                job={c.job}
+                            />
+                        )) : <TableRow><TableCell colSpan={6}>고객 데이터가 없습니다.</TableCell></TableRow>}
                     </TableBody>
                 </Table>
             </Paper>
