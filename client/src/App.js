@@ -5,6 +5,7 @@ import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
 import Customer from "./components/Customer";
 import React, { useState, useEffect } from 'react';
+import {CircularProgress} from "@mui/material";
 
 // 테마 생성
 const theme = createTheme({
@@ -19,16 +20,42 @@ const useStyles = makeStyles(() => ({
     },
     table: {
         minWidth: 1080
+    },
+    progress: {
+        margin: theme.spacing(2)
     }
 }));
 
+
+    /*
+        1. constructor()
+
+        2. componentWillMount()
+
+        3. render()
+
+        4. componentDidMount()
+
+
+        props or state => shouldComponentUpdate()
+    */
+
+
 function App() {
     const [customers, setCustomers] = useState([]);  // 상태 초기화
+    const [completed, setCompleted] = useState(0);   // 프로그레스 바 상태
+
+    const progress = () => {
+        setCompleted((prev) => (prev >= 100 ? 0 : prev + 1));
+    };
 
     useEffect(() => {
+        const timer = setInterval(progress, 20);
         callApi()
             .then(res => setCustomers(res))  // 고객 데이터를 상태에 저장
             .catch(err => console.log(err));
+
+        return () => clearInterval(timer); // 컴포넌트 언마운트 시 타이머 정리
     }, []);  // 컴포넌트가 마운트될 때만 호출
 
     const callApi = async () => {
@@ -64,7 +91,11 @@ function App() {
                                 gender={c.gender}
                                 job={c.job}
                             />
-                        )) : <TableRow><TableCell colSpan={6}>고객 데이터가 없습니다.</TableCell></TableRow>}
+                        )) : <TableRow>
+                                <TableCell colSpan={6} align={"center"}>
+                                    <CircularProgress className={classes.progress} variant={"determinate"} value={completed} />
+                                </TableCell>
+                            </TableRow>}
                     </TableBody>
                 </Table>
             </Paper>
