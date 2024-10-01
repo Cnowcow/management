@@ -8,13 +8,13 @@ class Customer extends React.Component {
         return (
             <TableRow>
                 <TableCell>{this.props.id}</TableCell>
-                <TableCell><img src={this.props.image} alt="profile"/></TableCell>
+                <TableCell><img src={this.props.image} alt="profile" style={{ width: 60, height: 60, objectFit: 'cover' }} /></TableCell>
                 <TableCell>{this.props.name}</TableCell>
                 <TableCell>{this.props.birthday}</TableCell>
                 <TableCell>{this.props.gender}</TableCell>
                 <TableCell>{this.props.job}</TableCell>
                 <TableCell><CustomerDelete stateRefresh={this.props.stateRefresh} id={this.props.id}/></TableCell>
-            </TableRow>
+            </TableRow> //이미지 60x60으로 출력하게 스타일 적용
         );
     }
 }

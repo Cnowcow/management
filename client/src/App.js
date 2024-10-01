@@ -95,14 +95,16 @@ class App extends React.Component {
         this.state = {
             customers: [],
             completed: 0,
+            searchKeyword: '',
         };
-    }
+    };
 
     // 상태 초기화 함수
     stateRefresh = () => {
         this.setState({
             customers: [],
             completed: 0,
+            searchKeyword: '',
         }, this.callApi);
     };
 
@@ -113,14 +115,20 @@ class App extends React.Component {
         }));
     };
 
+    handleValueChange = (e) => {
+        const nextStage = {};
+        nextStage[e.target.name] = e.target.value;
+        this.setState(nextStage);
+    };
+
     async componentDidMount() {
         this.timer = setInterval(this.progress, 20);
         this.callApi();
-    }
+    };
 
     componentWillUnmount() {
         clearInterval(this.timer); // 컴포넌트 언마운트 시 타이머 정리
-    }
+    };
 
     callApi = async () => {
         const response = await fetch('/api/customers'); // 절대 경로가 아닌 상대 경로로 변경
@@ -129,6 +137,14 @@ class App extends React.Component {
     };
 
     render() {
+        const filteredComponents = (data) => {
+            data = data.filter((c) => {
+                return c.name.indexOf(this.state.searchKeyword) > -1;
+            });
+            return data.map((c) => {
+                return <Customer stateRefresh={this.stateRefresh} key={c.id} id={c.id} image={c.image} name={c.name} birthday={c.birthday} gender={c.gender} job={c.job} />
+            })
+        }
         const { customers, completed } = this.state;
         const cellList = ["번호", "프로필 이미지", "이름", "생년월일", "성별", "직업", "설정",];
         return (
@@ -161,6 +177,9 @@ class App extends React.Component {
                                 <StyledInputBase
                                     placeholder="검색하기"
                                     inputProps={{ 'aria-label': 'search' }}
+                                    name={"searchKeyword"}
+                                    value={this.state.searchKeyword}
+                                    onChange={this.handleValueChange}
                                 />
                             </Search>
                         </Toolbar>
@@ -179,22 +198,14 @@ class App extends React.Component {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {customers.length > 0 ? customers.map(c => (
-                                <Customer
-                                    stateRefresh={this.stateRefresh}
-                                    key={c.id}
-                                    id={c.id}
-                                    image={c.image}
-                                    name={c.name}
-                                    birthday={c.birthday}
-                                    gender={c.gender}
-                                    job={c.job}
-                                />
-                            )) : <TableRow>
+                            {this.state.customers ?
+                                filteredComponents(this.state.customers) :
+                            <TableRow>
                                 <TableCell colSpan={6} align={"center"}>
                                     <CircularProgress variant={"determinate"} value={completed} />
                                 </TableCell>
-                            </TableRow>}
+                            </TableRow>
+                            }
                         </TableBody>
                     </Table>
                 </Paper>
@@ -202,6 +213,6 @@ class App extends React.Component {
             </div>
         );
     }
-}
+};
 
 export default App;
