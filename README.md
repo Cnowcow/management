@@ -1,73 +1,38 @@
-## Management System
-React와 node.js로 만든 고객 관리 시스템 입니다.
+# React와 node.js로 만든 고객 관리 시스템 입니다.
 
-# Getting Started with Create React App
+## ✏ 프로젝트 개요
+React(클라이언트) + node.js(서버) 환경으로 고객관리시스템 페이지 만들기.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![image](https://github.com/user-attachments/assets/0759eba2-bc2b-4155-9520-4cae72ceeb67)
 
-## Available Scripts
+<hr><br>
 
-In the project directory, you can run:
+## ✨기술스택✨
+react <br>
+node.js <br>
+docker <br>
+git <br>
 
-### `npm start`
+<br>
+<hr>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 🔎 배포 사이트
+http://hhjnn92.synology.me:3000/
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 💾  작업 내용
+- 컴포넌트 구조화
+- 데이터베이스 세팅 및 연동
+- RESTful API 구축
+- 추가, 삭제, 검색 기능
+- node.js 서버 docker에 구축
+- 이미지 업로드 서버 구축
+- 배포
 
-### `npm test`
+## 🔎 문제점 및 해결 방안
+- #### 최근에는 클래스형 컴포넌트를 사용하지 않아서 맞는 라이브러리를 찾느라 고생했다.
+  → 함수 사용하는 법도 다르고,,, 추후에 클래스형 -> 함수형 컴포넌트로 변경해야겠다.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+##  🔍프로젝트 기간
+2024-09-30 ~ 2024-10-02 (3일)
+<hr>
+<br><br><br>
